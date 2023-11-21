@@ -1,11 +1,11 @@
+import { paginateAction } from '../state-management/actions';
 import { useCustomContext } from '../state-management/app-context';
 
 export const Pagination = () => {
   const { state, dispatch } = useCustomContext();
 
-  const pages = state?.pagination?.totalPages ?? 1;
   let pagesArr = [];
-  for (let i = 0; i <= pages; i++) {
+  for (let i = 0; i < state?.pagination?.totalPages; i++) {
     pagesArr[i] = i + 1;
   }
   return (
@@ -13,9 +13,10 @@ export const Pagination = () => {
       {pagesArr.map((n) => {
         return (
           <p
+            onClick={() => dispatch(paginateAction(n))}
             className={`${
               state?.pagination?.currPage === n ? 'selected-page' : ''
-            } mx-2 text-primary text-underline-hover`}
+            } mx-2 text-primary text-underline-hover p-2`}
           >
             {n}
           </p>
