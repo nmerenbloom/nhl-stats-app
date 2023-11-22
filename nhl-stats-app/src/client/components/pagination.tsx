@@ -9,7 +9,7 @@ export const Pagination = () => {
     pagesArr[i] = i + 1;
   }
   return (
-    <div className='d-flex justify-content-center'>
+    <div className='d-flex justify-content-center overflow-scroll'>
       {pagesArr.map((n) => {
         return (
           <p

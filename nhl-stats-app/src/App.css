@@ -1,3 +1,11 @@
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  cursor: pointer;
+  background-color: rgba(166, 101, 173, 0.089);
+}
 
 
 .lds-circle {

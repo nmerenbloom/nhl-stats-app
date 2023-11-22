@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import '../App.css';
@@ -17,7 +17,7 @@ export const App = () => {
 
   const onFetchPlayersBtnClick = async () => {
     dispatch(toggleSpinnerAction(true));
-    dispatch(await fetchPlayersAction());
+    dispatch(await fetchPlayersAction(state));
   };
 
   const stateManagementProviderValues = { state, dispatch };
@@ -25,7 +25,7 @@ export const App = () => {
   return (
     <CustomContext.Provider value={stateManagementProviderValues}>
       <div className='container d-flex flex-column align-items-center justify-content-center'>
-        <h1 className='text-center my-4'>NHL Player Stats ({PAGE_SIZE})</h1>
+        <h1 className='text-center my-4'>NHL Player Stats</h1>
         {state?.playerStats?.allPlayers?.length === 0 ? (
           <button
             onClick={() => onFetchPlayersBtnClick()}
