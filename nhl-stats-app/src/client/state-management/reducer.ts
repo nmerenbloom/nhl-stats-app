@@ -1,4 +1,5 @@
 import { PAGE_SIZE, StatCategories } from '../../types/constants';
+import { NumericFilterObj } from '../../types/data-filter';
 import { AppState } from '../../types/state';
 import { ActionTypes, AppAction } from './actions';
 
@@ -24,6 +25,7 @@ export const reducer = (state: AppState, action: AppAction): AppState => {
     case ActionTypes.TOGGLE_LOADING_SPINNER:
       return { ...state, isLoading: action.payload };
     case ActionTypes.EDIT_DATA_FILTERS:
+      // console.log(action.payload);
       return {
         ...state,
         dataFilters: action.payload,
@@ -35,11 +37,24 @@ export const reducer = (state: AppState, action: AppAction): AppState => {
   }
 };
 
-const initCategories = Object.values(StatCategories);
+// const initCategories = Object.values(StatCategories);
+const initNumericFilters: NumericFilterObj[] = Object.values(
+  StatCategories
+).map((statCat) => {
+  return {
+    stat: statCat,
+    operator: statCat === StatCategories.TEAM ? '=' : '>',
+    value: undefined,
+  };
+});
 export const initialState: AppState = {
   isLoading: false,
   playerStats: { allPlayers: [] },
-  pagination: { currPage: 1, totalPages: 1 },
+  pagination: { currPage: 1, totalPages: 0 },
   showGoToolTip: false,
-  dataFilters: { isAverages: false, sortOrder: Object.values(StatCategories) },
+  dataFilters: {
+    isAverages: false,
+    numericFilters: initNumericFilters,
+    sortOrder: Object.values(StatCategories),
+  },
 };

@@ -1,12 +1,66 @@
-.list-group-item {
-  cursor: pointer;
+
+
+.custom-list-item:hover {
+  cursor: grab;
+  background-color: rgba(30, 2, 33, 0.089);
 }
 
-.list-group-item:hover {
-  cursor: pointer;
+/* .reorder-icon:hover {
+  cursor:grab;
+} */
+
+/* .custom-list {
+  border-radius: 5px;
+} */
+
+/* ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+ul {
+  position: relative;
+  width: 300px;
+}
+
+li {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 15px 18px;
+  position: relative;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: grab;
+} */
+
+/* li:hover{
   background-color: rgba(166, 101, 173, 0.089);
+} */
+
+/* .grey-space:hover {
+  height: 8px;
+ background-color: rgb(146, 107, 107);
 }
 
+.grey-space {
+ height: 8px;
+ background-color: rgb(255, 255, 255);
+} */
+
+/* .floating {
+  position: absolute;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+} */
 
 .lds-circle {
   display: inline-block;

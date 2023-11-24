@@ -26,16 +26,8 @@ export const App = () => {
     <CustomContext.Provider value={stateManagementProviderValues}>
       <div className='container d-flex flex-column align-items-center justify-content-center'>
         <h1 className='text-center my-4'>NHL Player Stats</h1>
-        {state?.playerStats?.allPlayers?.length === 0 ? (
-          <button
-            onClick={() => onFetchPlayersBtnClick()}
-            className='btn btn-primary w-25'
-          >
-            Fetch Player Stats!
-          </button>
-        ) : (
-          <PlayerGrid></PlayerGrid>
-        )}
+
+        <PlayerGrid></PlayerGrid>
         <div> {state?.isLoading ? <LoadingSpinner /> : null}</div>
       </div>
     </CustomContext.Provider>

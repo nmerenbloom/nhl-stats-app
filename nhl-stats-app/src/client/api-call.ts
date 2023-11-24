@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PlayerStats } from '../types/player-stats';
-import { DataFilters } from '../types/data-filter';
+import { DataFilters, NumericFilterObj } from '../types/data-filter';
 
 // export const getSkaterStats = async (): Promise<PlayerStats[]> => {
 //   try {
@@ -18,6 +18,7 @@ export const getSkaterStats = async (
   try {
     const allSkatersRes = await axios.post(`${getDomain()}/skaters-query`, {
       ...f,
+      numericFilters: f.numericFilters.filter((n) => n.value !== undefined),
     });
     return allSkatersRes.data;
   } catch (error: any) {
@@ -38,3 +39,26 @@ const getDomain = (): string => {
       return '';
   }
 };
+
+// const filterNfo = (nfos: NumericFilterObj[]) => {
+//   return nfos.filter((n) => n.value !== undefined);
+// };
+
+// const formatNumericFilterStatAttr = (stat: string) => stat.toLowerCase();
+
+// const formatSortCats = (f: DataFilters) => {
+//   // const formatted = f.sortOrder.map((cat) => {
+//   //   if (cat === 'SOG') {
+//   //     return 'shots';
+//   //   } else {
+//   //     return cat.toLowerCase();
+//   //   }
+//   // });
+
+//   const r = formatted.filter((cat) => {
+//     return cat !== 'team' && cat !== 'player';
+//   }); //to do REMOVE
+
+//   // console.log(r);
+//   return r;
+// };

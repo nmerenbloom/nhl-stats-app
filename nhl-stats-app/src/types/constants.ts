@@ -4,13 +4,13 @@ export const PLAYER_STATS_URL =
 export const PAGE_SIZE = 10;
 
 export enum StatCategories {
-  PLAYER_NAME = 'Player',
-  TEAM = 'Team',
-  GAMES_PLAYED = 'GP',
-  GOALS = 'Goals',
-  ASSISTS = 'Assists',
-  POINTS = 'Points',
-  SHOTS_ON_GOAL = 'SOG',
-  HITS = 'Hits',
-  BLOCKS = 'Blocks',
+  // PLAYER_NAME = 'Player',
+  TEAM = 'team',
+  GAMES_PLAYED = 'gp',
+  GOALS = 'goals',
+  ASSISTS = 'assists',
+  POINTS = 'points',
+  SHOTS_ON_GOAL = 'shots',
+  HITS = 'hits',
+  BLOCKS = 'blocks',
 }
