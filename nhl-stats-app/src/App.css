@@ -1,3 +1,24 @@
+
+
+.custom-list-item:hover {
+  cursor: grab;
+  background-color: rgba(30, 2, 33, 0.089);
+}
+
+.purp {
+  background-color: #410093;
+  color: white;
+  outline: white solid 2px;
+  
+}
+
+.purp:hover{
+  color: #410093;
+  outline: #410093 solid 2px;
+  /* outline-style:; */
+  /* font-weight: bold; */
+}
+
 .lds-circle {
   display: inline-block;
   position: fixed;
@@ -13,6 +34,8 @@
 
 .selected-page {
   background-color: rgb(175, 202, 211);
+  border-radius: 25px;
+  /* margin: 5px; */
 }
 
 /* .overlay {

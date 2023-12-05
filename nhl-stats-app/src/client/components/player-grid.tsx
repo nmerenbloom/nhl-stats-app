@@ -1,30 +1,59 @@
+import { useEffect, useRef } from 'react';
+import { PAGE_SIZE, StatCategories } from '../../types/constants';
 import { PlayerStats } from '../../types/player-stats';
 import { useCustomContext } from '../state-management/app-context';
 import { Pagination } from './pagination';
+import { Tooltip } from 'bootstrap'; // Import Bootstrap's Tooltip class
+import {
+  editFiltersAction,
+  fetchPlayersAction,
+  toggleSpinnerAction,
+} from '../state-management/actions';
+import { SortOrderDropdown } from './sort-order-dropdown';
+import { FiltersBar } from './filters-bar';
+import { YahooConnectButton } from './yahoo-connect-btn';
 
 export const PlayerGrid = () => {
   const { state, dispatch } = useCustomContext();
 
-  // const playserSlice = state?.playerStats ?? [];
+  const indexStart = state.pagination.currPage * PAGE_SIZE - PAGE_SIZE;
+  const indexEnd = state.pagination.currPage * PAGE_SIZE;
+
+  const playserSlice = state?.playerStats?.allPlayers?.slice(
+    indexStart,
+    indexEnd
+  );
 
   return (
     <div className='container'>
-      <table className=' table table-striped'>
+      {state.yahooConnection.isFulllyConnected ? (
+        <p>Hello, {state.yahooConnection.email}</p>
+      ) : (
+        <YahooConnectButton></YahooConnectButton>
+      )}
+      {/* <button
+        onClick={async () => await doYahooEx1()}
+        className='btn btn-success'
+      >
+        Fetch My Players
+      </button> */}
+      <FiltersBar></FiltersBar>
+      <table className='border border-secondary table table-striped'>
         <thead>
-          <th>Player</th>
-          <th>GP</th>
-          <th>Goals</th>
-          <th>Assists</th>
-          <th>Points</th>
-          <th>SOG</th>
-          <th>Hits</th>
-          <th>Blocks</th>
+          <th></th>
+          <th>PLAYER</th>
+          {/* <th>Team</th> */}
+          {Object.values(StatCategories).map((cat) => {
+            return <th>{cat.toUpperCase()}</th>;
+          })}
         </thead>
         <tbody>
-          {state?.playerStats?.allPlayers?.slice(0, 26).map((p) => {
+          {playserSlice.map((p) => {
             const row = (
-              <tr>
+              <tr key={p.id}>
+                <td>{p.id + 1}</td>
                 <td>{p.player}</td>
+                <td>{p.team}</td>
                 <td>{p.gp}</td>
                 <td>{p.goals}</td>
                 <td>{p.assists}</td>
