@@ -25,12 +25,13 @@ export const reducer = (state: AppState, action: AppAction): AppState => {
     case ActionTypes.TOGGLE_LOADING_SPINNER:
       return { ...state, isLoading: action.payload };
     case ActionTypes.EDIT_DATA_FILTERS:
-      // console.log(action.payload);
       return {
         ...state,
         dataFilters: action.payload,
         showGoToolTip: true,
       };
+    case ActionTypes.CONNECT_TO_YAHOO:
+      return { ...state, yahooConnection: action.payload };
 
     default:
       return state;
@@ -49,12 +50,13 @@ const initNumericFilters: NumericFilterObj[] = Object.values(
 });
 export const initialState: AppState = {
   isLoading: false,
+  yahooConnection: { hasCode: false, isFulllyConnected: false, email: '' },
   playerStats: { allPlayers: [] },
   pagination: { currPage: 1, totalPages: 0 },
   showGoToolTip: false,
   dataFilters: {
     isAverages: false,
     numericFilters: initNumericFilters,
-    sortOrder: Object.values(StatCategories),
+    sortOrder: Object.values(StatCategories).slice(1 - 1),
   },
 };

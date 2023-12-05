@@ -2,16 +2,61 @@ import axios from 'axios';
 import { PlayerStats } from '../types/player-stats';
 import { DataFilters, NumericFilterObj } from '../types/data-filter';
 
-// export const getSkaterStats = async (): Promise<PlayerStats[]> => {
-//   try {
-//     const allSkatersRes = await axios.get(`${getDomain()}/all-skaters`);
-//     return allSkatersRes.data;
-//   } catch (error: any) {
-//     console.log('Error fetching player stats');
-//     console.error(error);
-//     return [];
-//   }
-// };
+export const getAuth = async () => {
+  // try {
+  //   const x = await axios.get(`${getDomain()}/auth/yahoo`);
+  //   console.log(x);
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  const redirectUri = 'https://nhl-stats-client.web.app/';
+  window.location.href = `https://api.login.yahoo.com/oauth2/request_auth_fe?client_id=dj0yJmk9WHU1anpzbnlVeXJNJmQ9WVdrOWNHMXhlWFpKTjNFbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTI4&response_type=code&redirect_uri=${redirectUri}`;
+};
+
+export const getMeta = async () => {
+  try {
+    const x = await axios.get(`${getDomain()}/meta`);
+    console.log(x);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const sendTest = async () => {
+  try {
+    const x = await axios.get(`${getDomain()}/test`);
+    console.log(x);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getYahooSignUrl = async () => {
+  try {
+    const x = await axios.get(`${getDomain()}/signin`);
+    console.log(x.data);
+    window.location.href = x.data;
+    const queryParameters = new URLSearchParams(window.location.search);
+    const code = queryParameters.get('code');
+    console.log(code);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getYahooFantasyData = async () => {
+  try {
+    const queryParameters = new URLSearchParams(window.location.search);
+    const code = queryParameters.get('code');
+    // console.log(code);
+    const x = await axios.post(`${getDomain()}/dashboard`, { code: code });
+    console.log(x.data);
+    return x.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getSkaterStats = async (
   f: DataFilters
 ): Promise<PlayerStats[]> => {
@@ -39,26 +84,3 @@ const getDomain = (): string => {
       return '';
   }
 };
-
-// const filterNfo = (nfos: NumericFilterObj[]) => {
-//   return nfos.filter((n) => n.value !== undefined);
-// };
-
-// const formatNumericFilterStatAttr = (stat: string) => stat.toLowerCase();
-
-// const formatSortCats = (f: DataFilters) => {
-//   // const formatted = f.sortOrder.map((cat) => {
-//   //   if (cat === 'SOG') {
-//   //     return 'shots';
-//   //   } else {
-//   //     return cat.toLowerCase();
-//   //   }
-//   // });
-
-//   const r = formatted.filter((cat) => {
-//     return cat !== 'team' && cat !== 'player';
-//   }); //to do REMOVE
-
-//   // console.log(r);
-//   return r;
-// };

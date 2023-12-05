@@ -11,6 +11,7 @@ import {
 } from '../state-management/actions';
 import { SortOrderDropdown } from './sort-order-dropdown';
 import { FiltersBar } from './filters-bar';
+import { YahooConnectButton } from './yahoo-connect-btn';
 
 export const PlayerGrid = () => {
   const { state, dispatch } = useCustomContext();
@@ -25,6 +26,17 @@ export const PlayerGrid = () => {
 
   return (
     <div className='container'>
+      {state.yahooConnection.isFulllyConnected ? (
+        <p>Hello, {state.yahooConnection.email}</p>
+      ) : (
+        <YahooConnectButton></YahooConnectButton>
+      )}
+      {/* <button
+        onClick={async () => await doYahooEx1()}
+        className='btn btn-success'
+      >
+        Fetch My Players
+      </button> */}
       <FiltersBar></FiltersBar>
       <table className='border border-secondary table table-striped'>
         <thead>

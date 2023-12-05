@@ -1,7 +1,13 @@
+import { type } from 'os';
 import { DataFilters } from '../../types/data-filter';
 import { PlayerStats } from '../../types/player-stats';
 import { AppState } from '../../types/state';
-import { getSkaterStats } from '../api-call';
+import { YahooConnection } from '../../types/yahoo-connection';
+import {
+  getSkaterStats,
+  getYahooFantasyData,
+  getYahooSignUrl,
+} from '../api-call';
 
 // type ActionNames<T> = {
 //   [P in keyof T as `set${Capitalize<string & P>}Action`]: any;
@@ -13,13 +19,29 @@ export enum ActionTypes {
   TOGGLE_LOADING_SPINNER,
   PAGINATE,
   EDIT_DATA_FILTERS,
+  CONNECT_TO_YAHOO,
 }
 
 export type AppAction =
   | { type: ActionTypes.PAGINATE; payload: number }
   | { type: ActionTypes.TOGGLE_LOADING_SPINNER; payload: boolean }
   | { type: ActionTypes.FETCH_PLAYER_STATS; payload: PlayerStats[] }
-  | { type: ActionTypes.EDIT_DATA_FILTERS; payload: DataFilters };
+  | { type: ActionTypes.EDIT_DATA_FILTERS; payload: DataFilters }
+  | { type: ActionTypes.CONNECT_TO_YAHOO; payload: YahooConnection };
+
+export const getYahooFantasyDataAction = async (): Promise<AppAction> => {
+  // await getYahooSignUrl();
+  const yahooData = await getYahooFantasyData();
+
+  return {
+    type: ActionTypes.CONNECT_TO_YAHOO,
+    payload: {
+      hasCode: true,
+      isFulllyConnected: true,
+      email: yahooData?.name ?? 'idk',
+    },
+  };
+};
 
 export const editFiltersAction = (d: DataFilters): AppAction => {
   return { type: ActionTypes.EDIT_DATA_FILTERS, payload: d };
