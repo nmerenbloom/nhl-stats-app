@@ -1,4 +1,7 @@
 
+.savedQueryBox:hover {
+  cursor: pointer;
+}
 
 .custom-list-item:hover {
   cursor: grab;
@@ -9,7 +12,6 @@
   background-color: #410093;
   color: white;
   outline: white solid 2px;
-  
 }
 
 .purp:hover{
@@ -17,6 +19,19 @@
   outline: #410093 solid 2px;
   /* outline-style:; */
   /* font-weight: bold; */
+}
+
+.purp-text {
+  color: #410093;
+}
+
+.red-text {
+  color: red
+}
+
+.bd-highlight {
+  background-color: rgba(86,61,124,0.15);
+  border: 1px solid rgba(86,61,124,0.15);
 }
 
 .lds-circle {
@@ -37,16 +52,6 @@
   border-radius: 25px;
   /* margin: 5px; */
 }
-
-/* .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(88, 88, 88, 0.534);
-  pointer-events: none;
-} */
 
 .lds-circle > div {
   display: inline-block;

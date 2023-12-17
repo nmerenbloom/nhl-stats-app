@@ -11,6 +11,23 @@ export const SortOrderDropdown = () => {
 
   const dropDownValues = state.dataFilters.sortOrder;
 
+  const handlePlacesPastDecimalChange = (n: string, idx: number) => {
+    // console.log(n);
+    // let newNumber = parseInt(n);
+    let newNumber = parseInt(n);
+    if (n === undefined || n === null) {
+      newNumber = 0;
+    }
+    if (parseInt(n) > 3) {
+      newNumber = 3;
+    }
+
+    const curr = state.dataFilters.sortOrder;
+    curr[idx].digitsPastDecimalPoint = newNumber;
+
+    dispatch(editFiltersAction({ ...state.dataFilters, sortOrder: curr }));
+  };
+
   return (
     <div className='dropdown'>
       <button
@@ -23,7 +40,7 @@ export const SortOrderDropdown = () => {
       >
         Edit Sort Order
       </button>
-      <div className='dropdown-menu p-2 text-muted'>
+      <div className='dropdown-menu p-2 text-muted' style={{ width: '325px' }}>
         <div className='d-flex flex-column'>
           <Reorder.Group
             className='m-0 ps-4'
@@ -39,14 +56,31 @@ export const SortOrderDropdown = () => {
               );
             }}
           >
-            {dropDownValues.map((item) => (
+            {dropDownValues.map((item, i) => (
               <Reorder.Item
                 className='rounded-2 fs-5 border my-2 me-1 custom-list-item'
-                key={item}
+                key={item.stat}
                 value={item}
               >
                 <div className='d-flex justify-content-between align-items-center px-1'>
-                  {item.toUpperCase()}
+                  {item.stat?.toUpperCase() ?? 'ERR'}
+                  <input
+                    className='form-control w-25'
+                    type='number'
+                    value={item.digitsPastDecimalPoint}
+                    min={0}
+                    max={3}
+                    name=''
+                    id=''
+                    onChange={(e) => {
+                      handlePlacesPastDecimalChange(e.target.value, i);
+                    }}
+                    // onKeyDown={(e) => e.preventDefault()}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      return false;
+                    }}
+                  />
                   <ReorderIcon dragControls={controls}></ReorderIcon>
                 </div>
               </Reorder.Item>

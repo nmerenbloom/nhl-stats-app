@@ -7,12 +7,11 @@ import { initialState, reducer } from './state-management/reducer';
 import { PlayerGrid } from './components/player-grid';
 import { LoadingSpinner } from './components/loading-spinner';
 import {
-  fetchPlayersAction,
-  getYahooFantasyDataAction,
+  connectToYahooAction,
   toggleSpinnerAction,
 } from './state-management/actions';
-import { PAGE_SIZE } from '../types/constants';
-import { getAuth, getMeta, sendTest } from './api-call';
+import { Banner } from './components/banner';
+import { SavedQueries } from './components/saved-queries';
 
 export const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -24,7 +23,8 @@ export const App = () => {
       const queryParameters = new URLSearchParams(window.location.search);
       const code = queryParameters.get('code');
       if (code && !state.yahooConnection?.isFulllyConnected) {
-        dispatch(await getYahooFantasyDataAction());
+        dispatch(toggleSpinnerAction(true));
+        dispatch(await connectToYahooAction(state));
       }
     };
 
@@ -37,15 +37,25 @@ export const App = () => {
 
   return (
     <CustomContext.Provider value={stateManagementProviderValues}>
-      <div className='container d-flex py-2 flex-column align-items-center justify-content-center'>
-        {/* <div className='d-flex w-50 flex-row-reverse justify-content-between '> */}
-
-        <h1 className='text-center my-4 align-self-center'>NHL Player Stats</h1>
-        {/* </div> */}
-
-        {/* <p>{code}</p> */}
-
-        <PlayerGrid></PlayerGrid>
+      <div className='bg-light'>
+        <Banner />
+        <div className='d-flex p-4 m-4 '>
+          <div className='p-3 w-25 '>
+            <h2 className='text-center my-4 align-self-center'>
+              Saved Queries
+            </h2>
+            <hr className='mx-4' />
+            <SavedQueries />
+          </div>
+          <div className='p-3 border border-secondary w-75 bg-white rounded'>
+            <h2 className='text-center my-4 align-self-center'>
+              NHL Player Stats
+            </h2>
+            <hr className='mx-4' />
+            <h5 className='red-text'>{state?.appError?.errorMessage ?? ''}</h5>
+            <PlayerGrid />
+          </div>
+        </div>
         <div> {state?.isLoading ? <LoadingSpinner /> : null}</div>
       </div>
     </CustomContext.Provider>

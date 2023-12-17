@@ -10,9 +10,10 @@ export const Pagination = () => {
   }
   return (
     <div className='d-flex justify-content-center overflow-hidden'>
-      {pagesArr.map((n) => {
+      {pagesArr.map((n, i) => {
         return (
           <p
+            key={i}
             onClick={() => dispatch(paginateAction(n))}
             className={`${
               state?.pagination?.currPage === n ? 'selected-page' : ''

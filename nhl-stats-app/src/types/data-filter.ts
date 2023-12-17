@@ -3,8 +3,14 @@ import { PlayerStats } from './player-stats';
 
 export interface DataFilters {
   isAverages: boolean;
-  sortOrder: StatCategories[];
+  sortOrder: SortOrderObj[];
   numericFilters: NumericFilterObj[];
+  showOnlyAvailableSkaters: boolean;
+}
+
+export interface SortOrderObj {
+  stat: StatCategories;
+  digitsPastDecimalPoint: number;
 }
 
 export interface NumericFilterObj {
@@ -13,13 +19,10 @@ export interface NumericFilterObj {
   value?: number | string;
 }
 
-export type Operaters = '>' | '=';
+export interface SavedQuery {
+  name: string;
+  df: DataFilters;
+  isEdit: boolean;
+}
 
-// const filterPipeline = (playerData: PlayerStats[], conditions: string[]) => {
-//   conditions.forEach((conditionString) => {
-//     playerData = playerData.filter((p) => {
-//       return `${p.points} ${conditionString}`;
-//     });
-//   });
-//   return playerData;
-// };
+export type Operaters = '>' | '=';
