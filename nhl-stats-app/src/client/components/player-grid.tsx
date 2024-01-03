@@ -44,9 +44,17 @@ export const PlayerGrid = () => {
             <th>PLAYER</th>
             {showStatus ? <th>STATUS</th> : null}
             {/* <th>Team</th> */}
-            {Object.values(StatCategories).map((cat, i) => {
+            {/* {Object.values(StatCategories).map((cat, i) => {
               return <th key={i}>{cat.toUpperCase()}</th>;
-            })}
+            })} */}
+            <th>TEAM</th>
+            <th>GP</th>
+            <th>GOALS</th>
+            <th>ASSISTS</th>
+            <th>POINTS</th>
+            <th>SHOTS</th>
+            <th>HITS</th>
+            <th>BLOCKS</th>
           </tr>
         </thead>
         <tbody>

@@ -84,7 +84,7 @@ export const FiltersBar = () => {
             dispatch(saveQueryAction({ ...state }, currDataFilters));
           }}
           className='btn btn-info mx-2'
-          disabled={state.savedQueries.selectedIndex !== undefined}
+          // disabled={state.sav edQueries.selectedIndex !== undefined}
         >
           Save
         </button>

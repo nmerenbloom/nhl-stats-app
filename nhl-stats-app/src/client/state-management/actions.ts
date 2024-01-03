@@ -6,7 +6,12 @@ import {
   YahooConnection,
   YahooResponseData,
 } from '../../types/yahoo-connection';
-import { getSkaterStats, getInitYahooData, getYahooSignUrl } from '../api-call';
+import {
+  getSkaterStats,
+  getInitYahooData,
+  getYahooSignUrl,
+  getResumeSessionYahooData,
+} from '../api-call';
 import { integrateYahooData } from './state-helpers/yahoo-data-helpers';
 import { AppError } from '../../types/app-error';
 
@@ -83,6 +88,35 @@ export const connectToYahooAction = async (
   const session = queryParameters.get('code');
   window.history.replaceState({}, document.title, `/?session=${session}`);
 
+  const isYahooDataType = (input: any): input is YahooResponseData => {
+    return input.userInfo !== undefined;
+  };
+
+  if (!isYahooDataType(yahooData)) {
+    console.log(yahooData.errorMessage);
+    return {
+      type: ActionTypes.SET_APP_ERROR,
+      payload: yahooData,
+    };
+  } else {
+    return {
+      type: ActionTypes.CONNECT_TO_YAHOO,
+      payload: {
+        yc: {
+          hasCode: true,
+          isFulllyConnected: yahooData !== undefined,
+          yahooResponseData: yahooData,
+        },
+      },
+    };
+  }
+};
+
+export const resumeYahooSessionAction = async (
+  state: AppState
+): Promise<AppAction> => {
+  const yahooData = await getResumeSessionYahooData();
+  console.log(yahooData);
   const isYahooDataType = (input: any): input is YahooResponseData => {
     return input.userInfo !== undefined;
   };

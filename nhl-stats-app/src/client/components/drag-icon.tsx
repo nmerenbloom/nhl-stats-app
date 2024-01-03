@@ -12,7 +12,7 @@ export const ReorderIcon = ({ dragControls }: Props) => {
       width='15'
       height='15'
       onPointerDown={(event) => dragControls.start(event)}
-      // className='reorder-icon'
+      className='mx-2'
     >
       <path
         d='M 5 0 C 7.761 0 10 2.239 10 5 C 10 7.761 7.761 10 5 10 C 2.239 10 0 7.761 0 5 C 0 2.239 2.239 0 5 0 Z'

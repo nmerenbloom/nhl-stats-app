@@ -42,6 +42,23 @@ export const getInitYahooData = async (): Promise<
   }
 };
 
+export const getResumeSessionYahooData = async (): Promise<
+  YahooResponseData | AppError
+> => {
+  try {
+    const queryParameters = new URLSearchParams(window.location.search);
+    const session = queryParameters.get('session');
+    const x = await axios.post(`${getDomain()}/resume-session`, {
+      session: session,
+    });
+
+    return x.data;
+  } catch (error) {
+    console.log(error);
+    return { errorMessage: 'Error Resuming Yahoo! Connection' };
+  }
+};
+
 export const getSkaterStats = async (
   f: DataFilters
 ): Promise<PlayerStats[] | AppError> => {

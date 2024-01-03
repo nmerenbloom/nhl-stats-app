@@ -52,7 +52,7 @@ export const Banner = () => {
             github.com/nmerenbloom/nhl-stats-app
           </a>
         </h5>
-        <p>Last Deploy: 12/17/2023</p>
+        <p>Last Deploy: 12/27/2023</p>
         <b>Click GO to fetch data</b>
       </div>
     </div>
