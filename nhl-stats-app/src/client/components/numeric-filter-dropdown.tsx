@@ -24,7 +24,7 @@ export const NumbericFilterDropdown = () => {
       value: newValue,
     };
 
-    let newNfosArr = state.dataFilters.numericFilters;
+    let newNfosArr = { ...state }.dataFilters.numericFilters;
     newNfosArr[indx] = newFilter;
     dispatch(
       editFiltersAction({

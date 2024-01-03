@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import {
   editFiltersAction,
   fetchPlayersAction,
+  saveQueryAction,
   toggleSpinnerAction,
 } from '../state-management/actions';
 import { useCustomContext } from '../state-management/app-context';
@@ -11,6 +12,12 @@ import { NumbericFilterDropdown } from './numeric-filter-dropdown';
 
 export const FiltersBar = () => {
   const { state, dispatch } = useCustomContext();
+  const isYahooConnected = state.yahooConnection?.isFulllyConnected;
+  const showCheckbox =
+    (state.yahooConnection?.yahooResponseData?.LK?.leagueFound ?? false) &&
+    isYahooConnected;
+
+  const currDataFilters = state.dataFilters;
 
   useEffect(() => {
     // console.log(state.showGoToolTip);
@@ -34,7 +41,7 @@ export const FiltersBar = () => {
   };
 
   return (
-    <div className='d-flex justify-content-between border border-secondary bg-secondary bg-gradient p-2'>
+    <div className='d-flex align-items-center justify-content-between border border-secondary bg-secondary bg-gradient p-2'>
       <button
         data-bs-toggle='tooltip'
         data-bs-placement='top'
@@ -45,33 +52,68 @@ export const FiltersBar = () => {
       >
         Go
       </button>
+      {showCheckbox ? (
+        <div className='form-check'>
+          <input
+            onClick={() =>
+              dispatch(
+                editFiltersAction({
+                  ...state.dataFilters,
+                  showOnlyAvailableSkaters:
+                    !state.dataFilters.showOnlyAvailableSkaters,
+                })
+              )
+            }
+            className='form-check-input fs-5 '
+            type='checkbox'
+            value=''
+            disabled={false}
+            checked={state.dataFilters.showOnlyAvailableSkaters}
+            id='flexCheckDefault'
+          />
+          <label className='form-check-label fs-6' htmlFor='flexCheckDefault'>
+            Available Skaters Only
+          </label>
+        </div>
+      ) : null}
       <SortOrderDropdown></SortOrderDropdown>
       <NumbericFilterDropdown></NumbericFilterDropdown>
-      <div className='btn-group'>
-        <a
+      <div>
+        <button
           onClick={() => {
-            dispatch(
-              editFiltersAction({ ...state.dataFilters, isAverages: true })
-            );
+            dispatch(saveQueryAction({ ...state }, currDataFilters));
           }}
-          className={`${
-            state.dataFilters.isAverages ? 'active' : ''
-          } btn btn-primary`}
+          className='btn btn-info mx-2'
+          // disabled={state.sav edQueries.selectedIndex !== undefined}
         >
-          Averages
-        </a>
-        <a
-          onClick={(e) => {
-            dispatch(
-              editFiltersAction({ ...state.dataFilters, isAverages: false })
-            );
-          }}
-          className={`${
-            state.dataFilters.isAverages ? '' : 'active'
-          } btn btn-primary`}
-        >
-          Totals
-        </a>
+          Save
+        </button>
+        <div className='btn-group'>
+          <a
+            onClick={() => {
+              dispatch(
+                editFiltersAction({ ...state.dataFilters, isAverages: true })
+              );
+            }}
+            className={`${
+              state.dataFilters.isAverages ? 'active' : ''
+            } btn btn-primary`}
+          >
+            Averages
+          </a>
+          <a
+            onClick={(e) => {
+              dispatch(
+                editFiltersAction({ ...state.dataFilters, isAverages: false })
+              );
+            }}
+            className={`${
+              state.dataFilters.isAverages ? '' : 'active'
+            } btn btn-primary`}
+          >
+            Totals
+          </a>
+        </div>
       </div>
     </div>
   );

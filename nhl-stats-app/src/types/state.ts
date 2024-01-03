@@ -1,4 +1,4 @@
-import { DataFilters } from './data-filter';
+import { DataFilters, SavedQuery } from './data-filter';
 import { PaginationData } from './pagination';
 import { PlayerStats } from './player-stats';
 import { YahooConnection } from './yahoo-connection';
@@ -10,4 +10,6 @@ export interface AppState {
   showGoToolTip: boolean;
   dataFilters: DataFilters;
   yahooConnection: YahooConnection;
+  appError?: { errorMessage: string };
+  savedQueries: { selectedIndex?: number; savedQueries: SavedQuery[] };
 }

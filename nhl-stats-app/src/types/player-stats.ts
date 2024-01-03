@@ -31,6 +31,8 @@ export interface PlayerStats {
   hits: number;
   blocks: number;
   goalieTime: number;
+  isMyPlayer?: boolean;
+  isTakenPlayers?: boolean;
 }
 
 export interface PlayerStatsRestResponse {

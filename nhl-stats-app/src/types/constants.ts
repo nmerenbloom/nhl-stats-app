@@ -6,6 +6,7 @@ export const PAGE_SIZE = 10;
 export enum StatCategories {
   // PLAYER_NAME = 'Player',
   TEAM = 'team',
+  POS = 'pos',
   GAMES_PLAYED = 'gp',
   GOALS = 'goals',
   ASSISTS = 'assists',
