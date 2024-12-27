@@ -1,0 +1,80 @@
+
+.savedQueryBox:hover {
+  cursor: pointer;
+}
+
+.custom-list-item:hover {
+  cursor: grab;
+  background-color: rgba(30, 2, 33, 0.089);
+}
+
+.purp {
+  background-color: #410093;
+  color: white;
+  outline: white solid 2px;
+}
+
+.purp:hover{
+  color: #410093;
+  outline: #410093 solid 2px;
+  /* outline-style:; */
+  /* font-weight: bold; */
+}
+
+.purp-text {
+  color: #410093;
+}
+
+.red-text {
+  color: red
+}
+
+.bd-highlight {
+  background-color: rgba(86,61,124,0.15);
+  border: 1px solid rgba(86,61,124,0.15);
+}
+
+.lds-circle {
+  display: inline-block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateZ(1px);
+}
+
+.text-underline-hover:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.selected-page {
+  background-color: rgb(175, 202, 211);
+  border-radius: 25px;
+  /* margin: 5px; */
+}
+
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: rgb(131, 17, 17);
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes lds-circle {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
