@@ -22,9 +22,8 @@ import { RotoWirePlayerStats } from './types/player-stats';
 import { NumericFilterObj, SortOrderObj } from './types/data-filters';
 import axios from 'axios';
 
-const yahooConsumerKey =
-  'dj0yJmk9NjVFb2ttZ25WOThNJmQ9WVdrOVpHSmtjMXBLU2pjbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTA3';
-const yahooConsumerSecret = '760c036befb96a9db85a72b3e525b215eb342cb5';
+const yahooConsumerKey = '';
+const yahooConsumerSecret = '';
 
 export const app = express();
 app.use(cors());
